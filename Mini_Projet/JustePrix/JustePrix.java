@@ -23,17 +23,17 @@ public class JustePrix {
             System.out.print("Nombre prémédité : ");
             numUser = my_scan.nextInt();
             if(numUser < numComputer){
-                System.out.println("🔽Trop petit !");
+                System.out.println("Trop petit !");
             }
             if (numUser > numComputer) {
-                System.out.println("🔼Trop grand !");
+                System.out.println("Trop grand !");
             }
             nmbTentatives++;
             /*if (numUser != numComputer) {
                 System.out.println("❌Pas trouvé...");
             }*/
         }
-        System.out.println("Bravo ! 🎉\nVous avez trouvé le nombre de l'ordinateur !");
+        System.out.println("Bravo ! \nVous avez trouvé le nombre de l'ordinateur !");
         System.out.println("Vous avez vaincu l'ordinateur en "+nmbTentatives+" essaies !");
 
         my_scan.close();
