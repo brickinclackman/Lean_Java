@@ -1,3 +1,7 @@
+/*A FAIRE :
+    Ajoute des niveaux de difficulté (par exemple, facile : 1-50, difficile : 1-1000).
+*/
+
 package Mini_Projet.JustePrix;
 
 import java.util.Scanner;
