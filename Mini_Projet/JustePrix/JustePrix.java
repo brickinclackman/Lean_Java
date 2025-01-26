@@ -12,51 +12,44 @@ public class JustePrix {
 
         boolean isPlaying = true;
         Scanner my_scan = new Scanner(System.in);
+        int bestScore = 100;
+        int Score = 0;
 
-        System.out.println("1. Jouer");
-        System.out.println("2. Afficher les règles");
-        System.out.println("3. Quitter");
-        System.out.print("Faites votre choix : ");
-        int choixMenu = my_scan.nextInt();
+        int choixMenu1 = menu(my_scan);
 
-        switch (choixMenu) {
-            case 1:
-                play(my_scan);
-                break;
-            case 2:
-                afficherRegles();
-                break;
-            case 3:
-                System.out.println("Au revoir !");
-                return; // Quitte le programme
-            default:
-                System.out.println("Choix invalide.");
-        }
+        if(choixMenu1 == 1){
+            while (isPlaying) {
+                Score = play(my_scan); // Passe le Scanner en paramètre
 
-        while (isPlaying) {
-            play(my_scan); // Passe le Scanner en paramètre
+                System.out.print("Voulez-vous rejouer ? Oui/Non : ");
+                try {
+                    String replay = my_scan.nextLine();
 
-            System.out.print("Voulez-vous rejouer ? Oui/Non : ");
-            try {
-                String replay = my_scan.nextLine();
+                    if (replay.equalsIgnoreCase("Oui")) {
+                        isPlaying = true;
+                    } else if (replay.equalsIgnoreCase("Non")) {
+                        isPlaying = false;
+                        System.out.println("Merci d'avoir joué ! À bientôt !");
+                    } else {
+                        System.out.println("Erreur : Veuillez répondre par 'Oui' ou 'Non'.");
+                    }
 
-                if (replay.equalsIgnoreCase("Oui")) {
-                    isPlaying = true;
-                } else if (replay.equalsIgnoreCase("Non")) {
-                    isPlaying = false;
-                    System.out.println("Merci d'avoir joué ! À bientôt !");
-                } else {
-                    System.out.println("Erreur : Veuillez répondre par 'Oui' ou 'Non'.");
+                    if(Score < bestScore){
+                        bestScore = Score;
+                    }
+
+                    System.out.println("Best score : "+bestScore);
+                } catch (Exception e) {
+                    System.out.println("Erreur : Veuillez entrer une réponse valide.");
                 }
-            } catch (Exception e) {
-                System.out.println("Erreur : Veuillez entrer une réponse valide.");
             }
         }
 
+        
         my_scan.close();
     }
 
-    public static void play(Scanner my_scan) {
+    public static int play(Scanner my_scan) {
         Random my_random = new Random();
         int numComputer = my_random.nextInt(100) + 1;
         int numUser = 0;
@@ -84,6 +77,8 @@ public class JustePrix {
         System.out.println("Bravo ! Vous avez trouvé le nombre mystère !");
         System.out.println("Vous avez réussi en " + nmbTentatives + " essais !");
         my_scan.nextLine(); // Nettoie l'entrée après un `nextInt` pour éviter des problèmes dans `main()`
+
+        return nmbTentatives;
     }
 
     public static void afficherRegles() {
@@ -97,5 +92,42 @@ public class JustePrix {
         System.out.println("5. Le jeu affiche le nombre de tentatives nécessaires pour trouver.");
         System.out.println("\nAmusez-vous bien et bonne chance !");
         System.out.println("------------------------------------------");
+    }
+
+    public static int menu(Scanner my_scan){
+        int choixMenu;
+
+        do {
+            System.out.println("------------------------");
+            System.out.println("Menu :");
+            System.out.println("1. Jouer");
+            System.out.println("2. Afficher les règles");
+            System.out.println("3. Quitter");
+            System.out.println("------------------------");
+            System.out.print("Faites votre choix : ");
+            
+            while (!my_scan.hasNextInt()) {
+                System.out.println("Erreur : Veuillez entrer un nombre valide.");
+                my_scan.next(); // Consomme l'entrée invalide
+                System.out.print("Veuillez choisir une option (1, 2 ou 3) : ");
+            }
+        
+            choixMenu = my_scan.nextInt(); // Lecture du choix utilisateur
+
+            switch (choixMenu) {
+                case 1:
+                    break;
+                case 2:
+                    afficherRegles();
+                    break;
+                case 3:
+                    System.out.println("Au revoir !");
+                    break;
+                default:
+                    System.out.println("Choix invalide.");
+            }
+        } while (choixMenu != 3);
+
+        return choixMenu; // Quitte le programme
     }
 }
