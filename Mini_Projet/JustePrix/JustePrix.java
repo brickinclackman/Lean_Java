@@ -27,18 +27,20 @@ public class JustePrix {
 
                     if (replay.equalsIgnoreCase("Oui")) {
                         isPlaying = true;
+                        if(Score < bestScore){
+                            bestScore = Score;
+                        }
+                        System.out.println("Best score : "+bestScore);
                     } else if (replay.equalsIgnoreCase("Non")) {
                         isPlaying = false;
+                        if(Score < bestScore){
+                            bestScore = Score;
+                        }
+                        System.out.println("Best score : "+bestScore);
                         System.out.println("Merci d'avoir joué ! À bientôt !");
                     } else {
                         System.out.println("Erreur : Veuillez répondre par 'Oui' ou 'Non'.");
                     }
-
-                    if(Score < bestScore){
-                        bestScore = Score;
-                    }
-
-                    System.out.println("Best score : "+bestScore);
                 } catch (Exception e) {
                     System.out.println("Erreur : Veuillez entrer une réponse valide.");
                 }
@@ -126,7 +128,7 @@ public class JustePrix {
                 default:
                     System.out.println("Choix invalide.");
             }
-        } while (choixMenu != 3);
+        } while (choixMenu != 3 && choixMenu != 1);
 
         return choixMenu; // Quitte le programme
     }
